@@ -7,7 +7,7 @@ Tutorial
 The tutorial goes from a simple example which
 converts a pipeline to a more complex example
 involving operator not actually implemented in
-:epkg:`ONNX operators` or :epkg:`ONNX ML operators`.
+:epkg:`ONNX operators` or :epkg:`ONNX ML Operators`.
 
 .. toctree::
     :maxdepth: 2
@@ -32,11 +32,10 @@ The tutorial was tested with following version:
     import xgboost
     import skl2onnx
     import mlprodict
-    import pyquickhelper
 
     mods = [numpy, scipy, sklearn, lightgbm, xgboost,
             onnx, onnxmltools, onnxruntime,
-            skl2onnx, mlprodict, pyquickhelper]
+            skl2onnx, mlprodict]
     mods = [(m.__name__, m.__version__) for m in mods]
     mx = max(len(_[0]) for _ in mods) + 1
     for name, vers in sorted(mods):

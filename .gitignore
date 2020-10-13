@@ -55,9 +55,14 @@ tests_onnxmltools/tests_dump/*
 docs/tests/*.dot*
 tests/*.dot*
 tests/*.onnx
+tests/*.xlsx
 docs/tests/*.onnx
 docs/examples/validator_classifier.dot.png
 docs/examples/validator_classifier.dot
 docs/examples/mixture*.*
 docs/examples/cast1*
 docs/examples/cast2*
+docs/auto_tutorial/*
+docs/tutorial/*.onnx
+docs/tutorial/East*.jpg
+html
