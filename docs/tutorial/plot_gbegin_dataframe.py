@@ -59,7 +59,7 @@ pipe.fit(train_data, data['y'])
 # Display.
 
 dot = pipeline2dot(pipe, train_data)
-ax = plot_graphviz(dot)
+ax = plot_graphviz(dot, dpi=100)
 ax.get_xaxis().set_visible(False)
 ax.get_yaxis().set_visible(False)
 
@@ -89,7 +89,7 @@ onx = to_onnx_ext(
 
 
 oinf = OnnxInference(onx)
-ax = plot_graphviz(oinf.to_dot())
+ax = plot_graphviz(oinf.to_dot(), dpi=100)
 ax.get_xaxis().set_visible(False)
 ax.get_yaxis().set_visible(False)
 

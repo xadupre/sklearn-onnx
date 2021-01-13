@@ -117,6 +117,6 @@ oinf.run({'X': X[:2].astype(numpy.float32)},
 # Final graph
 # +++++++++++
 
-ax = plot_graphviz(oinf.to_dot())
+ax = plot_graphviz(oinf.to_dot(), dpi=100)
 ax.get_xaxis().set_visible(False)
 ax.get_yaxis().set_visible(False)

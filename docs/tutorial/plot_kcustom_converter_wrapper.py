@@ -198,6 +198,6 @@ print(diff(exp, got))
 # +++++++++++
 
 oinf = OnnxInference(onx)
-ax = plot_graphviz(oinf.to_dot())
+ax = plot_graphviz(oinf.to_dot(), dpi=100)
 ax.get_xaxis().set_visible(False)
 ax.get_yaxis().set_visible(False)
