@@ -26,13 +26,14 @@ toolkits into `ONNX <https://onnx.ai>`_.
     auto_examples/index
     pipeline
     parameterized
-    supported
+    supported    
 
 **Issues, questions**
 
 You should look for `existing issues <https://github.com/onnx/sklearn-onnx/issues?utf8=%E2%9C%93&q=is%3Aissue>`_
 or submit a new one. Sources are available on
 `onnx/sklearn-onnx <https://github.com/onnx/sklearn-onnx>`_.
+See also `code coverage <coverage_html/coverage_html/index.html>`_.
 
 **ONNX version**
 
