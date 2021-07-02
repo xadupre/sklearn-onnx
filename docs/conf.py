@@ -5,7 +5,6 @@
 #
 # Configuration file for the Sphinx documentation builder.
 
-from github_link import make_linkcode_resolve
 import os
 import sys
 import warnings
@@ -13,6 +12,7 @@ import skl2onnx
 import sphinx_readable_theme
 
 sys.path.append(os.path.abspath('exts'))
+from github_link import make_linkcode_resolve
 
 
 # -- Project information -----------------------------------------------------
