@@ -4,7 +4,6 @@
 """
 Benchmark of onnxruntime on LogisticRegression.
 """
-# Authors: Xavier Dupré (benchmark)
 from io import BytesIO
 from time import perf_counter as time
 import numpy as np
@@ -14,12 +13,7 @@ import matplotlib.pyplot as plt
 import pandas
 from sklearn import config_context
 from sklearn.linear_model import LogisticRegression
-try:
-    # scikit-learn >= 0.22
-    from sklearn.utils._testing import ignore_warnings
-except ImportError:
-    # scikit-learn < 0.22
-    from sklearn.utils.testing import ignore_warnings
+from sklearn.utils._testing import ignore_warnings
 from skl2onnx import convert_sklearn
 from skl2onnx.common.data_types import FloatTensorType
 from onnxruntime import InferenceSession
@@ -193,7 +187,7 @@ def plot_results(df, verbose=False):
 
 @ignore_warnings(category=FutureWarning)
 def run_bench(repeat=1000, verbose=False):
-    n_obs = [1, 10, 100, 1000, 10000, 100000]
+    n_obs = [1, 10, 100, 1000, 10000]
     methods = ['predict_proba']  # ['predict', 'predict_proba']
     n_features = [10, 50]
     fit_intercepts = [True]

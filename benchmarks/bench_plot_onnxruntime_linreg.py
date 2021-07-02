@@ -14,12 +14,7 @@ import matplotlib.pyplot as plt
 import pandas
 from sklearn import config_context
 from sklearn.linear_model import LinearRegression
-try:
-    # scikit-learn >= 0.22
-    from sklearn.utils._testing import ignore_warnings
-except ImportError:
-    # scikit-learn < 0.22
-    from sklearn.utils.testing import ignore_warnings
+from sklearn.utils._testing import ignore_warnings
 from skl2onnx import convert_sklearn
 from skl2onnx.common.data_types import FloatTensorType
 from onnxruntime import InferenceSession
@@ -129,7 +124,7 @@ def bench(n_obs, n_features, fit_intercepts, methods,
                             p2 = p2.ravel()
                             try:
                                 assert_almost_equal(
-                                    p1.ravel(), p2.ravel(), decimal=5)
+                                    p1.ravel(), p2.ravel(), decimal=4)
                             except AssertionError as e:
                                 warnings.warn(str(e))
     return res
