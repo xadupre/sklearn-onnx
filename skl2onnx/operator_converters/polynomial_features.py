@@ -16,8 +16,8 @@ def convert_sklearn_polynomial_features(scope: Scope, operator: Operator,
     transformed_columns = [None] * (op.n_output_features_)
 
     try:
-        combinations = op._combinations(op.n_input_features_, self._min_degree,
-                                        self._max_degree, op.interaction_only,
+        combinations = op._combinations(op.n_input_features_, op._min_degree,
+                                        op._max_degree, op.interaction_only,
                                         op.include_bias)
     except TypeError:
         combinations = op._combinations(op.n_input_features_, op.degree,
