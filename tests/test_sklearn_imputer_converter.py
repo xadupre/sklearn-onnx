@@ -138,7 +138,8 @@ class TestSklearnImputerConverter(unittest.TestCase):
     @unittest.skipIf(SimpleImputer is None,
                      reason="SimpleImputer changed in 0.20")
     @unittest.skipIf(
-        StrictVersion(sklearn.__version__) < StrictVersion('0.24'),
+        StrictVersion('.'.join(sklearn.__version__.split('.')[:2])) <
+            StrictVersion('0.24'),
         reason="SimpleImputer does not support strings")
     def test_simple_imputer_string_inputs_int_mostf(self):
         model = SimpleImputer(
