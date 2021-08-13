@@ -36,7 +36,13 @@ from skl2onnx.algebra.onnx_ops import (
     OnnxIdentity, OnnxMul, OnnxLess, OnnxConcat, OnnxCast, OnnxAdd,
     OnnxClip)
 from skl2onnx.algebra.onnx_operator import OnnxSubEstimator
-from pyod.models.iforest import IForest
+
+try:
+    from pyod.models.iforest import IForest
+except (ImportError, RuntimeError, ValueError) as e:
+    print("Probably an incompatible version of scikit-learn:", e)
+    import sys
+    sys.exit(0)
 
 data1 = {'First':  [500, 500, 400, 100, 200, 300, 100],
          'Second': ['a', 'b', 'a', 'b', 'a', 'b', 'c']}
