@@ -81,6 +81,9 @@ from sklearn.gaussian_process import (
 # GridSearchCV
 from sklearn.model_selection import GridSearchCV
 
+# MultiOutput
+from sklearn.multioutput import MultiOutputClassifier, MultiOutputRegressor
+
 # Support vector machines
 from sklearn.svm import NuSVC, NuSVR, SVC, SVR
 
@@ -306,6 +309,8 @@ def build_sklearn_operator_name_map():
         MLPClassifier,
         MLPRegressor,
         MultinomialNB,
+        MultiOutputClassifier,
+        MultiOutputRegressor,
         KBinsDiscretizer,
         KNeighborsClassifier,
         KNeighborsRegressor,
