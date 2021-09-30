@@ -122,7 +122,7 @@ class TestConvert(unittest.TestCase):
                 if j == 1:
                     raise AssertionError("It should fail for opset.ml == 1")
                 dom = get_domain_opset(model_onnx)
-                self.assertEqual(len(dom), 1)
+                self.assertEqual(len(dom), 2)
                 self.assertEqual(dom['ai.onnx.ml'], 2)
 
     def test_warnings(self):
@@ -134,6 +134,44 @@ class TestConvert(unittest.TestCase):
                 pass
             assert len(w) == 1
             assert "Parameter dtype is no longer supported." in str(w[0])
+
+    @unittest.skipIf(KBinsDiscretizer is None, "skl too old")
+    def test_name(self):
+        data = load_iris()
+        X = data.data
+        model = KBinsDiscretizer(encode="ordinal")
+        model.fit(X)
+
+        with self.assertRaises(TypeError):
+            to_onnx(model, X[:1].astype(numpy.float32),
+                    target_opset=TARGET_OPSET, naming=(2, 3))
+
+        model_onnx = to_onnx(model, X[:1].astype(numpy.float32),
+                             target_opset=TARGET_OPSET, naming='KBINS')
+        inputs = set(i.name for i in model_onnx.graph.input)
+        outputs = set(o.name for o in model_onnx.graph.output)
+        for node in model_onnx.graph.node:
+            for i in node.input:
+                if i not in inputs and not i.startswith('KBINS'):
+                    raise AssertionError("Wrong %r." % i)
+            for o in node.output:
+                if o not in outputs and not o.startswith('KBINS'):
+                    raise AssertionError("Wrong %r." % o)
+
+        model_onnx = to_onnx(model, X[:1].astype(numpy.float32),
+                             target_opset=TARGET_OPSET,
+                             naming=lambda n, ns: 'FBINS' + n)
+        inputs = set(i.name for i in model_onnx.graph.input)
+        outputs = set(o.name for o in model_onnx.graph.output)
+        for node in model_onnx.graph.node:
+            for i in node.input:
+                if i not in inputs and not i.startswith('FBINS'):
+                    raise AssertionError("Wrong %r." % i)
+            for o in node.output:
+                if o not in outputs and not o.startswith('FBINS'):
+                    raise AssertionError("Wrong %r." % o)
+        self.assertEqual(inputs, {'X'})
+        self.assertEqual(outputs, {'variable'})
 
 
 if __name__ == "__main__":

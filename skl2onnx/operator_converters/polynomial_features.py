@@ -15,14 +15,14 @@ def convert_sklearn_polynomial_features(scope: Scope, operator: Operator,
     op = operator.raw_operator
     transformed_columns = [None] * (op.n_output_features_)
 
-    try:
-        combinations = op._combinations(
-            op.n_input_features_,
-            getattr(op, '_min_degree', 1),
-            getattr(op, '_max_degree', op.degree),
-            op.interaction_only,
-            op.include_bias)
-    except TypeError:
+    if hasattr(op, '_min_degree'):
+        # scikit-learn >= 1.0
+        combinations = op._combinations(op.n_input_features_,
+                                        op._min_degree,
+                                        op._max_degree,
+                                        op.interaction_only,
+                                        op.include_bias)
+    else:
         combinations = op._combinations(op.n_input_features_, op.degree,
                                         op.interaction_only,
                                         op.include_bias)
